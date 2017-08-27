@@ -1,12 +1,11 @@
 <template>
     <div class="painel">
         <h2 class="painel-titulo" @dblclick="visivel = !visivel">{{ titulo }}</h2>
-            <transition name="painel-fade">
-                <div class="painel-corpo" v-show="visivel">
-                    <slot></slot>
-                </div>
-            </transition>
-        </slot>
+        <transition name="painel-fade">
+            <div class="painel-corpo" v-show="visivel">
+                <slot></slot>
+            </div>
+        </transition>
     </div>
 </template>
 
