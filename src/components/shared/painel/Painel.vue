@@ -47,10 +47,6 @@ export default {
 	color: grey
 }
 
-.imagem-responsiva {
-	width: 100%;
-}
-
 * {
     box-shadow: 5px 5px 5px black;
 }
