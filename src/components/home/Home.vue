@@ -1,12 +1,13 @@
 <template>
 	<div>
 		<h1 class="centralizado">Alurapic</h1>
+		<p v-show="mensagem" class="centralizado">{{ mensagem }}</p>
 		<input type="search" class="filtro" @input="filtro = $event.target.value" 
 			placeholder="filtre pelo título da foto">
 		<ul class="lista-fotos">
 			<li class="lista-fotos-item" v-for="foto of fotosComFiltro">
 				<meu-painel :titulo="foto.titulo">
-					<imagem-responsiva :url="foto.url" :titulo="foto.titulo" />
+					<imagem-responsiva v-meu-transform:scale.animacao="1.2" :url="foto.url" :titulo="foto.titulo" />
 					<botao-remove 
 						tipo="button" 
 						rotulo="Remover" 
@@ -23,6 +24,7 @@
 import Painel from '../shared/painel/Painel.vue';
 import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue';
 import Botao from '../shared/botao/Botao.vue';
+import transform from '../../directives/Transform';
 
 export default {
 
@@ -32,12 +34,17 @@ export default {
 		'imagem-responsiva': ImagemResponsiva,
 		'botao-remove': Botao
 	},
+
+	directives: {
+		'meu-transform': transform
+	},
   
 	data() {
 
 		return {
 			fotos: [],
-			filtro: ''
+			filtro: '',
+			mensagem: ''
 		}
 	},
 
@@ -65,8 +72,13 @@ export default {
 	methods: {
 
 		remove(foto, $event) {
-			alert($event);
-			alert('Remover a foto ' + foto.titulo);
+			this.$http
+				.delete(`http://localhost:3000/v1/fotos/${foto._id}`)
+				.then(() => this.mensagem= 'Foto removida com sucesso', 
+					err => {
+						console.log(err);
+						this.mensagem= 'Não foi possível remover a foto';
+					})
 		}
 	}
 }

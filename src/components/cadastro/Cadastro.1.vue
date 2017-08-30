@@ -7,20 +7,21 @@
     <form class="centralizado" @submit.prevent="grava()">
       <div class="controle">
         <label for="titulo">TÍTULO</label>
-        <input id="titulo" autocomplete="off" v-model="foto.titulo">
+        <input id="titulo" autocomplete="off" 
+          @input="foto.titulo = $event.target.value" :value="foto.titulo">
       </div>
 
       <div class="controle">
         <label for="url">URL</label>
-        <input id="url" autocomplete="off" v-model.lazy="foto.url">
-        <div style="width: 200px; margin: 0 auto;" >
-          <imagem-responsiva v-show="foto.url" :url="foto.url" :titulo="foto.titulo"/>
-        </div>
+        <input id="url" autocomplete="off" 
+          @input="foto.url = $event.target.value" :value="foto.url">
+        <imagem-responsiva/>
       </div>
 
       <div class="controle">
         <label for="descricao">DESCRIÇÃO</label>
-        <textarea id="descricao" autocomplete="off" v-model="foto.descricao"></textarea>
+        <textarea id="descricao" autocomplete="off" 
+          @input="foto.descricao = $event.target.value" :value="foto.descricao"></textarea>
       </div>
 
       <div class="centralizado">
@@ -34,9 +35,8 @@
 
 <script>
 
-import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue';
+import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue'
 import Botao from '../shared/botao/Botao.vue';
-import Foto from '../../domain/foto/Foto';
 
 export default {
 
@@ -50,7 +50,12 @@ export default {
     
     return {
       
-      foto: new Foto()
+      foto: {
+
+        titulo: '',
+        url: '',
+        descricao: ''
+      }
     }
   },
 
@@ -58,15 +63,19 @@ export default {
 
     grava() {
 
-      this.$http.post('http://localhost:3000/v1/fotos', this.foto)
-        .then(() => this.foto = new Foto(), err => console.log(err)); 
+      console.log("enviar dados para a API");
+      this.foto =  {
+
+        titulo: '',
+        url: '',
+        descricao: ''
+      }
       
     }
   }
 }
 
 </script>
-
 <style scoped>
 
   .centralizado {
