@@ -1,6 +1,6 @@
 <template>
     <div class="painel">
-        <h2 class="painel-titulo" @dblclick="visivel = !visivel">{{ titulo }}</h2>
+        <h4 class="painel-titulo" @dblclick="visivel = !visivel">{{ titulo }}</h4>
         <transition name="painel-fade">
             <div class="painel-corpo" v-show="visivel">
                 <slot></slot>
@@ -34,7 +34,7 @@ export default {
     margin: 5px;
     box-shadow: 5px 5px 10px grey;
     width: 200px;
-    height: 100%;
+    height: 285px;
     vertical-align: top;
     text-align: center;
 }
@@ -45,10 +45,6 @@ export default {
     margin: 0 0 15px 0;
     padding: 10px;
 	color: grey
-}
-
-* {
-    box-shadow: 5px 5px 5px black;
 }
 
 .painel-fade-enter, .painel-fade-leave-active {

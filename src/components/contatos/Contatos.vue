@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h1 class="centralizado">Cadastro</h1>
-    <imagem-responsiva url="https://i.ytimg.com/vi/9cAmYXv6Aig/maxresdefault.jpg" titulo="cadastro" />
+    <h1 class="centralizado">Contatos</h1>
+    <imagem-responsiva url="http://eternaweb.com.br/wp-content/uploads/2016/01/Captura-de-Tela-2016-01-22-%C3%A0s-10.22.56.png"
+         titulo="cadastro" />
   </div>
 </template>
 
