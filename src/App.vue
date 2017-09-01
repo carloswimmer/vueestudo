@@ -18,7 +18,7 @@ export default {
 
 		return {
 
-			routes
+			routes: routes.filter(rota => rota.menu)
 		}
 	},
 

@@ -8,12 +8,7 @@
 			<li class="lista-fotos-item" v-for="foto of fotosComFiltro">
 				<meu-painel :titulo="foto.titulo">
 					<imagem-responsiva v-meu-transform:scale.animacao="1.2" :url="foto.url" :titulo="foto.titulo" />
-					<router-link :to="{ name: 'alteracao', params: { id: foto._id } }">
-						<meu-botao 
-							tipo="button"
-							rotulo="Alterar" />
-					</router-link>
-					<meu-botao
+					<botao-remove 
 						tipo="button" 
 						rotulo="Remover" 
 						@botaoAtivado="remove(foto, $event)"
@@ -30,7 +25,6 @@ import Painel from '../shared/painel/Painel.vue';
 import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue';
 import Botao from '../shared/botao/Botao.vue';
 import transform from '../../directives/Transform';
-import FotoService from '../../domain/foto/FotoService';
 
 export default {
 
@@ -38,11 +32,10 @@ export default {
 
 		'meu-painel': Painel,
 		'imagem-responsiva': ImagemResponsiva,
-		'meu-botao': Botao
+		'botao-remove': Botao
 	},
 
 	directives: {
-
 		'meu-transform': transform
 	},
   
@@ -70,25 +63,26 @@ export default {
 
 	created() {
 
-		this.service = new FotoService(this.$resource);
-
-		this.service
-			.lista()
-			.then(imagens => this.fotos = imagens, err => this.mensagem = err.message);
+		let promise = this.$http.get('v1/fotos');
+		promise
+			.then(res => res.json())
+			.then(imagens => this.fotos = imagens, err => console.log(err));
 	},
 
 	methods: {
 
 		remove(foto, $event) {
-
-			this.service
-				.apaga(foto._id)
+			this.$http
+				.delete(`v1/fotos/${foto._id}`)
 				.then(() => {
 					let indice = this.fotos.indexOf(foto);
 					this.fotos.splice(indice, 1);
-					this.mensagem = 'Foto removida com sucesso';
-					}, err => this.mensagem = err.message
-				);
+					this.mensagem= 'Foto removida com sucesso'
+					}, 
+					err => {
+						console.log(err);
+						this.mensagem= 'Não foi possível remover a foto';
+					})
 		}
 	}
 }

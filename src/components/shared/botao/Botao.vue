@@ -53,15 +53,16 @@ export default {
 <style>
 	.botao {
         display: inline-block;
-        padding: 10px;
+        padding: 5px 10px;
         border-radius: 8px;
-        margin: 10px;
+        margin: 10px 20px 0px 20px;
         font-size: 1.2em;
     }
 
     .botao-perigo {
         background: firebrick;
         color: white;
+        margin: 10px 20px 10px 20px;
     }
 
     .botao-padrao {

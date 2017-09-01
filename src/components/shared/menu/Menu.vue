@@ -2,7 +2,7 @@
     <nav class="menu">
         <ul >
             <li v-for="rota in rotas">
-                <router-link :to="rota.path ? rota.path : '/'">
+                <router-link :to="rota.path ? rota.path : '/'" >
                     {{ rota.nome }}
                 </router-link>
             </li>

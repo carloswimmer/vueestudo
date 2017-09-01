@@ -34,7 +34,7 @@ export default {
     margin: 5px;
     box-shadow: 5px 5px 10px grey;
     width: 200px;
-    height: 285px;
+    height: 100%;
     vertical-align: top;
     text-align: center;
 }
