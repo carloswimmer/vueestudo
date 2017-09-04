@@ -1,6 +1,7 @@
 <template>
     <nav class="menu">
         <ul >
+        <img src="/static/logo-marca.ico" alt="cursos" style="padding: 5px; width: 50px;" />
             <li v-for="rota in rotas">
                 <router-link :to="rota.path ? rota.path : '/'" >
                     {{ rota.nome }}
